@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    .calculator {
+      width: 300px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #070303;
+      border-radius: 5px;
+    }
+
+    input[type="text"], button {
+      margin: 5px;
+      padding: 5px;
+    }
+
+    .buttons {
+      margin-top: 10px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="inputA" placeholder="Nhập số A">
+    <input type="text" id="inputB" placeholder="Nhập số B">
+    <div class="buttons">
+      <button onclick="calculate('sum')">SUM</button>
+      <button onclick="calculate('subtract')">SUBTRACT</button>
+      <button onclick="calculate('multiply')">MULTIPLY</button>
+      <button onclick="calculate('divide')">DIVIDE</button>
+      <button onclick="reset()">RESET</button>
+    </div>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculate(operation) {
+      var inputA = parseFloat(document.getElementById('inputA').value);
+      var inputB = parseFloat(document.getElementById('inputB').value);
+      var resultDiv = document.getElementById('result');
+
+      if (isNaN(inputA) || isNaN(inputB)) {
+        resultDiv.innerText = "Vui lòng nhập số hợp lệ cho A và B.";
+      } else {
+        switch (operation) {
+          case 'sum':
+            resultDiv.innerText = "Tổng: " + (inputA + inputB);
+            break;
+          case 'subtract':
+            resultDiv.innerText = "Hiệu: " + (inputA - inputB);
+            break;
+          case 'multiply':
+            resultDiv.innerText = "Tích: " + (inputA * inputB);
+            break;
+          case 'divide':
+            if (inputB === 0) {
+              resultDiv.innerText = "Không thể chia cho 0.";
+            } else {
+              resultDiv.innerText = "Thương: " + (inputA / inputB);
+            }
+            break;
+          default:
+            resultDiv.innerText = "Phép tính không hợp lệ.";
+        }
+      }
+    }
+
+    function reset() {
+      document.getElementById('inputA').value = "";
+      document.getElementById('inputB').value = "";
+      document.getElementById('result').innerText = "";
+    }
+  </script>
+</body>
+</html>
